@@ -11,26 +11,26 @@ module.exports = {
 
         codigo: {
             type: 'int',
-            require: true
+            required: true
         },
         piso: {
             type: 'int',
-            require: true
+            required: true
         },
         precio: {
             type: 'float',
-            require: true
+            required: true
         },
         tipo: {
             type: 'string',
             enum: ['simple', 'doble', 'triple'],
-            require: true
+            required: true
         },
         estado: {
             type: 'boolean',
-            require: true
+            required: true
         },
-        Reserva: {
+        Reservas: {
             collection: "Reserva",
             via: "idHabitacion"
         }

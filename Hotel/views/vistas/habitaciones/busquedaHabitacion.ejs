@@ -8,7 +8,7 @@
 
         <form action="habitacionesDisponibles" method="post">
             <br>
-            <div class="form-group">
+            <!--<div class="form-group">
                 <label>Número de Adultos : </label>
                 <input class="form-control" type="number" name="numAdultos" value="1" min="1" max="25">
             </div>
@@ -16,19 +16,35 @@
             <div class="form-group">
                 <label>Número de Niños : </label>
                 <input class="form-control" type="number" name="numNiños" value="0" min="0" max="25">
-            </div>
+            </div>-->
             <div class="form-group">
                 <label>Tipo de habitaciones :</label>
 
+<!--
                 <select class="form-control" name="tipoHabitacion">
-                    <option>Simples</option>
-                    <option>Dobles</option>
-                    <option>Triples</option>
+                    <option value="simple">Simples</option>
+                    <option value="doble">Dobles</option>
+                    <option value="triple">Triples</option>
                 </select>
+-->
+                <div class="checkbox">
+                    <label>
+                        <input type="checkbox" name="simple"> Simple
+                    </label>
+                </div>
+                <div class="checkbox">
+                    <label>
+                        <input type="checkbox" name="doble"> Doble
+                    </label>
+                </div>
+                <div class="checkbox">
+                    <label>
+                        <input type="checkbox" name="triple"> Triple
+                    </label>
+                </div>
+
             </div>
 
-
-            <p style="color:red" id="demo2"></p>
 
             <div class="form-group">
                 <label> Fecha de Inicio: </label>
@@ -40,7 +56,7 @@
                 <input class="form-control" type="date" name="fechaSalida" id="fechaSalida" required>
             </div>
 
-            <p style="color:red" id="demo"></p>
+        
             <br>
             <button type="submit" class="btn btn-success btn-block">Consultar Disponibilidad </button>
 
@@ -55,24 +71,24 @@
 
 
 <script>
-    var date = new Date();
-    var day = date.getDate();
-    var month = date.getMonth() + 1;
-    var year = date.getFullYear();
-    if (month < 10) month = "0" + month;
-    if (day < 10) day = "0" + day;
-    var today = year + "-" + month + "-" + day;
-
-    document.getElementById("theDate").min = today;
-    var tomorrow = year + "-" + month + "-" + (day + 1);
-    document.getElementById("fechaSalida").min = tomorrow;
-
-    function addDays(date, days) {
-        var result = new Date(date);
-        result.setDate(result.getDate() + days);
-        return result;
-    }
-    localStorage.setItem("fechaInicio", "dato")
+//    var date = new Date();
+//    var day = date.getDate();
+//    var month = date.getMonth() + 1;
+//    var year = date.getFullYear();
+//    if (month < 10) month = "0" + month;
+//    if (day < 10) day = "0" + day;
+//    var today = year + "-" + month + "-" + day;
+//
+//    document.getElementById("theDate").min = today;
+//    var tomorrow = year + "-" + month + "-" + (day + 1);
+//    document.getElementById("fechaSalida").min = tomorrow;
+//
+//    function addDays(date, days) {
+//        var result = new Date(date);
+//        result.setDate(result.getDate() + days);
+//        return result;
+//    }
+//    localStorage.setItem("fechaInicio", "dato")
 </script>
 
 

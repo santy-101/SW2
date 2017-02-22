@@ -35,6 +35,7 @@ module.exports.routes = {
 
     'get /': 'RutasController.home',
 
+
     'post /habitacionesDisponibles': 'RutasController.busqueda',
     
     'get /error': 'RutasController.error',
@@ -50,10 +51,8 @@ module.exports.routes = {
         view: 'login'
     },
     
-    'get /ingresarHuespedes': {
-        view: 'ingresarHuespedes'
-    }
-
+    'get /seleccionHabitaciones': 'RutasController.seleccionHabitaciones'
+    
     /***************************************************************************
      *                                                                          *
      * Custom routes here...                                                    *

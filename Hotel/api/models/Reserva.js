@@ -11,6 +11,12 @@ module.exports = {
         numeroHuespedes: {
             type: "string"
         },
+        fechaInicioReserva: {
+            type: "date"
+        },
+        fechaFinReserva: {
+            type: "date"
+        },
         idUsuario: {
             model: "Usuario"
         },

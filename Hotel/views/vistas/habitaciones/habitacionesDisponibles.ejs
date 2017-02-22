@@ -1,94 +1,84 @@
 <link rel="stylesheet" href="misEstilos/busquedaHabitacion.css">
 
 
-<% if (habitaciones[0].tipo=="simple") {%>
 
-    <h1>Habitaciones Simples Disponibles </h1>
 
-    <%}%>
-        <% if (habitaciones[0].tipo=="doble") {%>
+<h1>Habitaciones Disponibles </h1>
 
-            <h1>Habitaciones Dobles Disponibles </h1>
 
-            <%}%>
+<form action="/seleccionHabitaciones" method="GET">
+    <br>
+    <br>
+    <% for(var i=0; i<habitaciones.length; i++) {%>
+        <div class="row">
 
-                <% if (habitaciones[0].tipo=="triple") {%>
-
-                    <h1>Habitaciones Triples Disponibles </h1>
+            <div class="col-sm-4">
+                <% if (habitaciones[i].tipo=="simple") {%>
+                    <img src="/fotos/habitacionSimple1.jpg" alt="Habitacion Simple Economica" class="imagenes">
 
                     <%}%>
+                        <% if (habitaciones[i].tipo=="doble") {%>
+                            <img src="/fotos/habitacionDoble.jpg" alt="Habitacion Simple Economica" class="imagenes">
+
+                            <%}%>
+                                <% if (habitaciones[i].tipo=="triple") {%>
+                                    <img src="/fotos/habitacionTriple.jpg" alt="Habitacion Simple Economica" class="imagenes">
+
+                                    <%}%>
+            </div>
+            <div class="col-sm-4">
+                <br>
+                <br>
+                <br>
+                <h3 style="color:black">Tipo de habitación: <%= habitaciones[i].tipo%></h3>
+                <h3 style="color:black">Codigo de la Habitación: <%= habitaciones[i].codigo%></h3>
+                <h3 style="color:black">Precio: <%= habitaciones[i].precio%></h3>
+                <h3 style="color:black">Piso: <%= habitaciones[i].piso%></h3>
+
+            </div>
+
+            <div class="col-sm-4">
+                <br>
+                <br>
+                <br>
+                <div class="checkbox">
+                    <label>
+                        <input type="checkbox" name="seleccion" value="<%= habitaciones[i].id%>"> Selecciona!
+                    </label>
+                </div>
+            </div>
+        </div>
+
+        <% }%>
 
 
-                        <form action="/ingresarHuespedes" method="GET">
-                            <br>
-                            <br>
-                            <% for(var i=0; i<habitaciones.length; i++) {%>
-                                <div class="row">
+            <br>
 
-                                    <div class="col-sm-4">
-                                        <% if (habitaciones[i].tipo=="simple") {%>
-                                            <img src="/fotos/habitacionSimple1.jpg" alt="Habitacion Simple Economica" class="imagenes">
+            <center>
 
-                                            <%}%>
-                                                <% if (habitaciones[i].tipo=="doble") {%>
-                                                    <img src="/fotos/habitacionDoble.jpg" alt="Habitacion Simple Economica" class="imagenes">
-
-                                                    <%}%>
-                                                        <% if (habitaciones[i].tipo=="triple") {%>
-                                                            <img src="/fotos/habitacionTriple.jpg" alt="Habitacion Simple Economica" class="imagenes">
-
-                                                            <%}%>
-                                    </div>
-                                    <div class="col-sm-4">
-                                        <br>
-                                        <br>
-                                        <br>
-                                        <h3 style="color:black">Codigo de la Habitación: <%= habitaciones[i].codigo%></h3>
-                                        <h3 style="color:black">Precio: <%= habitaciones[i].precio%></h3>
-                                        <h3 style="color:black">Piso: <%= habitaciones[i].piso%></h3>
-                                        
-                                    </div>
-
-                                    <div class="col-sm-4">
-                                        <br>
-                                        <br>
-                                        <br>
-                                        <a href="/setCookieHabitacion?idHabitacion=<%= habitaciones[i].id%>&codigoHabitacion=<%= habitaciones[i].codigo%>" class="btn btn-danger btn-block"  id="<%= habitaciones[i].id%>" >Seleccionar esta opción</a>
-                                    </div>
-
-                                    <!--<button type="submit" class="btn btn-primary btn-block">Seleccionar esta opción </button>-->
-                                </div>
-
-                                <% }%>
+                <button type="submit" class="btn btn-success btn-lg">Continuar con la reserva </button>
+            </center>
+</form>
 
 
-                                    <br>
+<script>
+    function seleccion(id) {
 
-                                    <center>
+        console.log(id);
+        document.getElementById(id).style.backgroundColor = "brown";
+        //                                document.getElementById("dos").style.backgroundColor = "#DBA901";
+        //                                document.getElementById("tres").style.backgroundColor = "#DBA901";
+    }
 
-                                        <button type="submit" class="btn btn-success btn-lg">Continuar con la reserva </button>
-                                    </center>
-                        </form>
+    function seleccion2() {
+        document.getElementById("dos").style.backgroundColor = "brown";
+        document.getElementById("uno").style.backgroundColor = "#DBA901";
+        document.getElementById("tres").style.backgroundColor = "#DBA901";
+    }
 
-
-                        <script>
-                            function seleccion(id) {
-                                
-                            console.log(id);
-                                document.getElementById(id).style.backgroundColor = "brown";
-//                                document.getElementById("dos").style.backgroundColor = "#DBA901";
-//                                document.getElementById("tres").style.backgroundColor = "#DBA901";
-                            }
-
-                            function seleccion2() {
-                                document.getElementById("dos").style.backgroundColor = "brown";
-                                document.getElementById("uno").style.backgroundColor = "#DBA901";
-                                document.getElementById("tres").style.backgroundColor = "#DBA901";
-                            }
-
-                            function seleccion3() {
-                                document.getElementById("tres").style.backgroundColor = "brown";
-                                document.getElementById("uno").style.backgroundColor = "#DBA901";
-                                document.getElementById("dos").style.backgroundColor = "#DBA901";
-                            }
-                        </script>
+    function seleccion3() {
+        document.getElementById("tres").style.backgroundColor = "brown";
+        document.getElementById("uno").style.backgroundColor = "#DBA901";
+        document.getElementById("dos").style.backgroundColor = "#DBA901";
+    }
+</script>
