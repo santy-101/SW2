@@ -207,7 +207,9 @@ module.exports = {
                     sails.log.info(habitaciones);
 
                     return res.view('vistas/habitaciones/ingresarHuespedes', {
-                        habitaciones: habitaciones
+                        habitaciones: habitaciones, 
+                        fechaInicio:res.cookies.busqueda.fechaInicio,
+                        fechaInicio:res.cookies.busqueda.fechaInicio
                     });
                 }
 
@@ -251,6 +253,7 @@ module.exports = {
                 
                 var fechas= req.cookies.busqueda;
                 
+                sails.log.info("Coookiessss"+req.cookies.busqueda);
                 sails.log.info("Coookie"+fechas);
 
                           var reservaCrear ={
@@ -334,11 +337,11 @@ module.exports = {
     },
 
     getCookieHabitacion: function (req, res) {
-        res.ok(req.cookies.habitacion);
+        res.ok(req.cookies.busqueda);
         return res.send(200);
 
 
-    },
+    },  
 
 
     deleteCookieHabitacion: function (req, res) {
