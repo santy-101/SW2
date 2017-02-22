@@ -43,7 +43,7 @@
                 <br>
                 <div class="checkbox">
                     <label>
-                        <input type="checkbox" name="seleccion" value="<%= habitaciones[i].id%>"> Selecciona!
+                        <input type="checkbox" name="id" value="<%= habitaciones[i].id%>"> Selecciona!
                     </label>
                 </div>
             </div>
@@ -57,6 +57,7 @@
             <center>
 
                 <button type="submit" class="btn btn-success btn-lg">Continuar con la reserva </button>
+<!--                <input class="btn-checkout" type="submit" value="Secure Checkout" id="submitBtn" disabled="disabled"/>-->
             </center>
 </form>
 
@@ -81,4 +82,16 @@
         document.getElementById("uno").style.backgroundColor = "#DBA901";
         document.getElementById("dos").style.backgroundColor = "#DBA901";
     }
+</script>
+
+
+<script>
+    $('form').submit(function(e) {
+        if ($('input[type=checkbox]:checked').length === 0) {
+            e.preventDefault();
+            
+            alert("Debe seleccionar al menos una habitacion!");
+             
+        }
+    });
 </script>

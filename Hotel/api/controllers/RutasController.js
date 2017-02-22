@@ -177,13 +177,39 @@ module.exports = {
         
         var parametros = req.allParams();
         
-        sails.log.info(parametros.seleccion.length);
+        sails.log.info(parametros.id.length);
         
-        for (var i=0; i<parametros.seleccion.length; i++){
-            sails.log.info(parametros.seleccion[i])
+        for (var i=0; i<parametros.id.length; i++){
+            sails.log.info(parametros.id[i])
             
         }
-        
+         Habitacion.find({
+                    where: parametros,
+                    sort: 'precio DESC'
+                })
+                .populate("Reservas")
+                .exec(function (err, habitaciones) {
+
+                    if (err) {
+                        return res.view('vistas/error', {
+                            error: {
+                                desripcion: "No hay habitaciones disponibles para los parametros ingresados",
+                                rawError: err,
+                                url: "/"
+                            }
+                        });
+                    } else {
+                        
+                        sails.log.info(habitaciones);
+
+                        return res.view('vistas/habitaciones/ingresarHuespedes', {
+                            habitaciones: habitaciones
+                        });
+                    }
+
+
+                });
+
         
         
     },
