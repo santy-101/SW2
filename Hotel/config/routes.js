@@ -39,6 +39,13 @@ module.exports.routes = {
     
     'get /error': 'RutasController.error',
     
+    'get /setCookieHabitacion': 'RutasController.setCookieSeleccion',
+    
+    'get /getCookieHabitacion': 'RutasController.getCookieHabitacion',
+    
+    'get /deleteCookieHabitacion': 'RutasController.deleteCookieHabitacion',
+    
+    
     'get /login': {
         view: 'login'
     },

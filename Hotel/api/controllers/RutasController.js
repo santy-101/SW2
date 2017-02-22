@@ -36,11 +36,11 @@ module.exports = {
                 }
             });
         } else {
-            
-            var tipo2=parametros.tipoHabitacion;
+
+            var tipo2 = parametros.tipoHabitacion;
             sails.log.info(tipo2);
-            
-            if (tipo2== "Simples") {
+
+            if (tipo2 == "Simples") {
                 Habitacion.find({
                     where: {
                         tipo: 'simple'
@@ -62,7 +62,7 @@ module.exports = {
                             habitaciones: habitaciones
                         });
                     }
-            
+
 
 
 
@@ -70,8 +70,8 @@ module.exports = {
                 });
 
             }
-            
-             if (tipo2== "Dobles") {
+
+            if (tipo2 == "Dobles") {
                 Habitacion.find({
                     where: {
                         tipo: 'doble'
@@ -93,7 +93,7 @@ module.exports = {
                             habitaciones: habitaciones
                         });
                     }
-            
+
 
 
 
@@ -101,9 +101,9 @@ module.exports = {
                 });
 
             }
-            
-            
-             if (tipo2== "Triples") {
+
+
+            if (tipo2 == "Triples") {
                 Habitacion.find({
                     where: {
                         tipo: 'triple'
@@ -125,7 +125,7 @@ module.exports = {
                             habitaciones: habitaciones
                         });
                     }
-            
+
 
 
 
@@ -133,22 +133,81 @@ module.exports = {
                 });
 
             }
-            
+
 
 
 
         }
 
     },
-    
-    
-    setCookieSeleccion: function (req, res)
-    {
-      var parametros = req.allParams();
-      var habitacionesCookie = req.cookies.habitacion;
+
+
+    setCookieSeleccion: function (req, res) {
+        var parametros = req.allParams();
+        var habitacionesCookie = req.cookies.habitacion;
+
+        sails.log.info(parametros.idHabitacion);
+        sails.log.info(parametros.codigoHabitacion);
+
+        sails.log.info(habitacionesCookie);
+
+        var nuevaHabitacion = {
+            idHabitacion: parametros.idHabitacion,
+            codigoHabitacion: parametros.codigoHabitacion
+        }
         
+        if (habitacionesCookie){
+
+        if (habitacionesCookie.length>= 1) {
+
+            sails.log.info("habitacionesCookie");
+            sails.log.info(habitacionesCookie);
+
+            for (var i = 0; i < habitacionesCookie.length; i++) {
+                if (parametros.idHabitacion == habitacionesCookie[i].idHabitacion) {
+                    return res.badRequest("Ya tiene esa reserva");
+                }
+            }
+
+            habitacionesCookie.push(nuevaHabitacion);
+
+            res.cookie('habitacion', habitacionesCookie);
+            // return res.ok(habitacionesCookie);
+            // return res.view('vistas/habitaciones/habitacionesDisponibles');
+            // return res.cookie(); 
+           // res.cookie('habitacion', [nuevaHabitacion]);
+            return res.send(500);
+
+        } }else {
+
+            res.cookie('habitacion', [nuevaHabitacion]);
+
+            return res.ok(nuevaHabitacion);
+
+        }
+
+
+
+
     },
 
+    getCookieHabitacion: function (req, res) {
+         res.ok(req.cookies.habitacion);
+         return res.send(200);
+
+
+    },
+    
+    
+    deleteCookieHabitacion: function (req, res) {
+        res.clearCookie('habitacion');
+        
+        return res.send(200);
+
+
+    },
+    
+    
 
     setCookie: function (req, res) {
 

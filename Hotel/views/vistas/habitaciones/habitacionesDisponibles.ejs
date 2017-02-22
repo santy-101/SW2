@@ -46,14 +46,14 @@
                                         <h3 style="color:black">Codigo de la Habitación: <%= habitaciones[i].codigo%></h3>
                                         <h3 style="color:black">Precio: <%= habitaciones[i].precio%></h3>
                                         <h3 style="color:black">Piso: <%= habitaciones[i].piso%></h3>
-                                        <input type="hidden" name="numOpcion<%= i %>" value="AAAA" class="btn btn-danger btn-block">
+                                        
                                     </div>
 
                                     <div class="col-sm-4">
                                         <br>
                                         <br>
                                         <br>
-                                        <a href="" class="btn btn-danger btn-block"  id="<%= habitaciones[i].id%>" onclick="seleccion('<%= habitaciones[i].id%>')"  >Seleccionar esta opción</a>
+                                        <a href="/setCookieHabitacion?idHabitacion=<%= habitaciones[i].id%>&codigoHabitacion=<%= habitaciones[i].codigo%>" class="btn btn-danger btn-block"  id="<%= habitaciones[i].id%>" >Seleccionar esta opción</a>
                                     </div>
 
                                     <!--<button type="submit" class="btn btn-primary btn-block">Seleccionar esta opción </button>-->
