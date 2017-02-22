@@ -40,10 +40,73 @@ module.exports = {
             var tipo2=parametros.tipoHabitacion;
             sails.log.info(tipo2);
             
-            if (tipo2= "Dobles") {
+            if (tipo2== "Simples") {
                 Habitacion.find({
                     where: {
                         tipo: 'simple'
+                    },
+                    sort: 'precio DESC'
+                }).exec(function (err, habitaciones) {
+
+                    if (err) {
+                        return res.view('vistas/error', {
+                            error: {
+                                desripcion: "No hay habitaciones disponibles para los parametros ingresados",
+                                rawError: err,
+                                url: "/"
+                            }
+                        });
+                    } else {
+                        sails.log.info(habitaciones);
+                        return res.view('vistas/habitaciones/habitacionesDisponibles', {
+                            habitaciones: habitaciones
+                        });
+                    }
+            
+
+
+
+
+                });
+
+            }
+            
+             if (tipo2== "Dobles") {
+                Habitacion.find({
+                    where: {
+                        tipo: 'doble'
+                    },
+                    sort: 'precio DESC'
+                }).exec(function (err, habitaciones) {
+
+                    if (err) {
+                        return res.view('vistas/error', {
+                            error: {
+                                desripcion: "No hay habitaciones disponibles para los parametros ingresados",
+                                rawError: err,
+                                url: "/"
+                            }
+                        });
+                    } else {
+                        sails.log.info(habitaciones);
+                        return res.view('vistas/habitaciones/habitacionesDisponibles', {
+                            habitaciones: habitaciones
+                        });
+                    }
+            
+
+
+
+
+                });
+
+            }
+            
+            
+             if (tipo2== "Triples") {
+                Habitacion.find({
+                    where: {
+                        tipo: 'triple'
                     },
                     sort: 'precio DESC'
                 }).exec(function (err, habitaciones) {
@@ -76,6 +139,14 @@ module.exports = {
 
         }
 
+    },
+    
+    
+    setCookieSeleccion: function (req, res)
+    {
+      var parametros = req.allParams();
+      var habitacionesCookie = req.cookies.habitacion;
+        
     },
 
 
