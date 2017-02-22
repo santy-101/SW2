@@ -1,0 +1,158 @@
+<link rel="stylesheet" href="misEstilos/busquedaHabitacion.css">
+
+<div class="centro">
+    <h1>Reserva de Habitaciones</h1>
+</div>
+<div class="row">
+    <div class="col-sm-6">
+
+        <form action="habitacionesDisponibles" method="post">
+            <br>
+            <div class="form-group">
+                <label>Número de Adultos : </label>
+                <input class="form-control" type="number" name="numAdultos" value="1" min="1" max="25">
+            </div>
+
+            <div class="form-group">
+                <label>Número de Niños : </label>
+                <input class="form-control" type="number" name="numNiños" value="0" min="0" max="25">
+            </div>
+            <div class="form-group">
+                <label>Tipo de habitaciones :</label>
+
+                <select class="form-control" name="tipoHabitacion">
+                    <option>Simples</option>
+                    <option>Dobles</option>
+                    <option>Triples</option>
+                </select>
+            </div>
+
+
+            <p style="color:red" id="demo2"></p>
+
+            <div class="form-group">
+                <label> Fecha de Inicio: </label>
+                <input class="form-control" type="date" name="fechaInicio" id="theDate" required>
+            </div>
+
+            <div class="form-group">
+                <label> Fecha de Salida: </label>
+                <input class="form-control" type="date" name="fechaSalida" id="fechaSalida" required>
+            </div>
+
+            <p style="color:red" id="demo"></p>
+            <br>
+            <button type="submit" class="btn btn-success btn-block">Consultar Disponibilidad </button>
+
+        </form>
+
+    </div>
+    <div class="col-sm-6">
+        <img src="fotos/hotel.jpg" width="500px" style="margin-top: 120px" alt="hotel">
+    </div>
+</div>
+
+
+
+<script>
+    var date = new Date();
+    var day = date.getDate();
+    var month = date.getMonth() + 1;
+    var year = date.getFullYear();
+    if (month < 10) month = "0" + month;
+    if (day < 10) day = "0" + day;
+    var today = year + "-" + month + "-" + day;
+
+    document.getElementById("theDate").min = today;
+    var tomorrow = year + "-" + month + "-" + (day + 1);
+    document.getElementById("fechaSalida").min = tomorrow;
+
+    function addDays(date, days) {
+        var result = new Date(date);
+        result.setDate(result.getDate() + days);
+        return result;
+    }
+    localStorage.setItem("fechaInicio", "dato")
+</script>
+
+
+
+
+<!--
+<% var numHabitaciones = 3 %>
+
+    <form action="/Rutas/CrearVarios" method="post">
+
+
+        <% for(var i =0; i<numHabitaciones;i++){ %>
+
+            <div class="row">
+                <div class="col-sm-6">
+                    <h3>Informacion <%= i%></h3>
+                </div>
+                <div class="col-sm-6">
+                    <div class="form-group">
+                        <label>Número de Niños : </label>
+                        <input class="form-control" type="number" name="numHuespedes<%= i %>" value="0" min="0" max="25">
+                        <input type="hidden" name="numHabitacion<%= i %>">
+                    </div>
+                </div>
+            </div>
+
+
+
+
+
+
+
+            <%}%>
+            
+            <button type="submit" class="btn btn-success btn-block">Reservar Habitaciones</button>
+
+    </form>
+
+-->
+
+
+<!--
+
+<script>
+    function btnClick() {
+        document.getElementById("demo").innerHTML = '';
+        document.getElementById("demo2").innerHTML = '';
+        var x, y, text1, text2;
+        var simples, dobles, triples;
+
+        x = document.getElementById("theDate").value;
+
+        y = document.getElementById("fechaSalida").value;
+
+
+        simples = document.getElementById("simples").value;
+
+
+        dobles = document.getElementById("dobles").value;
+
+
+        triples = document.getElementById("triples").value;
+
+        if (!x || !y) {
+            text1 = "Ingrese fechas de inicio y salida.";
+
+            document.getElementById("demo").innerHTML = text1;
+        } else {
+            if (y <= x) {
+                text1 = "La fecha de salida no puede ser menor o igual que la de ingreso.";
+
+                document.getElementById("demo").innerHTML = text1;
+            }
+        }
+        if (simples + dobles + triples <= 0) {
+            text2 = "Debe reservar al menos una habitación.";
+            document.getElementById("demo2").innerHTML = text2;
+        }
+
+
+    }
+</script>
+-->

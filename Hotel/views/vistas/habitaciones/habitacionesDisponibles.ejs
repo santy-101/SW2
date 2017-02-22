@@ -1,0 +1,96 @@
+<!--<link rel="stylesheet" href="misEstilos/busquedaHabitacion.css">-->
+
+<h1>Habitaciones Disponibles </h1>
+
+   <form action="/ingresarHuespedes" method="GET">
+    <br>
+    <br>
+    <% for(var i=0; i<habitaciones.length; i++) {%>
+    <div class="row">
+        <div class="col-sm-1">
+        </div>
+
+        <div class="col-sm-4" style="border:solid">
+            <img src="/fotos/habitacionSimple1.jpg" alt="Habitacion Simple Economica" class="imagenes">
+            <h3 style="color:black">Codigo de la Habitación: <%= habitaciones[i].codigo%></h3>
+            <h3 style="color:black">Precio: <%= habitaciones[i].precio%></h3>
+            <h3 style="color:black">Piso: <%= habitaciones[i].piso%></h3>
+            <a href="" class="btn btn-danger btn-block" onclick="seleccion1()">Seleccionar esta opción</a>
+
+            <!--<button type="submit" class="btn btn-primary btn-block">Seleccionar esta opción </button>-->
+        </div>
+    
+    <% }%>
+
+<!--
+        <div class="col-sm-1">
+        </div>
+
+        <div class="col-sm-4" style="border:solid">
+            <img src="/fotos/habitacionSimple2.jpg" alt="Habitacion Simple Economica" class="imagenes">
+            <h3 style="color:black">Precio : 110 </h3>
+            <button type="submit" class="btn btn-primary btn-block">Seleccionar esta opción </button>
+        </div>
+
+        <div class="col-sm-1">
+        </div>
+-->
+<!--
+
+    </div>
+    <div class="row">
+        <br>
+        <br>
+    </div>
+
+
+    <div class="row">
+        <div class="col-sm-1">
+        </div>
+        <div class="col-sm-4" style="border:solid" id="uno">
+            <img src="/fotos/habitacionSimple3.jpg" alt="Habitacion Simple Economica" class="imagenes">
+            <h3 style="color:black">Precio : 150 </h3>
+            <button type="submit" class="btn btn-primary btn-block" onclick="seleccion1()">Seleccionar esta opción </button>
+        </div>
+
+        <div class="col-sm-1">
+        </div>
+
+        <div class="col-sm-4" style="border:solid">
+            <img src="/fotos/habitacionSimple4.jpg" alt="Habitacion Simple Economica" class="imagenes">
+            <h3 style="color:black">Precio : 200 </h3>
+            <button type="submit" class="btn btn-primary btn-block">Seleccionar esta opción </button>
+        </div>
+
+        <div class="col-sm-1">
+        </div> -->
+    </div>
+
+    <br>
+
+    <center>
+
+        <button type="submit" class="btn btn-success btn-lg">Continuar con la reserva </button>
+    </center>
+</form>
+
+
+<script>
+    function seleccion1() {
+        document.getElementById("uno").style.backgroundColor = "brown";
+        document.getElementById("dos").style.backgroundColor = "#DBA901";
+        document.getElementById("tres").style.backgroundColor = "#DBA901";
+    }
+
+    function seleccion2() {
+        document.getElementById("dos").style.backgroundColor = "brown";
+        document.getElementById("uno").style.backgroundColor = "#DBA901";
+        document.getElementById("tres").style.backgroundColor = "#DBA901";
+    }
+
+    function seleccion3() {
+        document.getElementById("tres").style.backgroundColor = "brown";
+        document.getElementById("uno").style.backgroundColor = "#DBA901";
+        document.getElementById("dos").style.backgroundColor = "#DBA901";
+    }
+</script>
