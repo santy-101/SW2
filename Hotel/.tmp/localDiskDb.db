@@ -1,0 +1,175 @@
+{
+  "data": {
+    "habitacion": [
+      {
+        "codigo": "101",
+        "piso": "1",
+        "precio": 60,
+        "tipo": "simple",
+        "estado": false,
+        "createdAt": "2017-02-21T23:12:23.068Z",
+        "updatedAt": "2017-02-21T23:12:23.068Z",
+        "id": 1
+      },
+      {
+        "codigo": "201",
+        "piso": "2",
+        "precio": 60,
+        "tipo": "simple",
+        "estado": false,
+        "createdAt": "2017-02-21T23:15:27.197Z",
+        "updatedAt": "2017-02-21T23:15:27.197Z",
+        "id": 2
+      },
+      {
+        "codigo": "301",
+        "piso": "3",
+        "precio": 100,
+        "tipo": "simple",
+        "estado": false,
+        "createdAt": "2017-02-21T23:15:53.175Z",
+        "updatedAt": "2017-02-21T23:15:53.175Z",
+        "id": 3
+      },
+      {
+        "codigo": "305",
+        "piso": "3",
+        "precio": 200,
+        "tipo": "doble",
+        "estado": false,
+        "createdAt": "2017-02-22T00:28:03.486Z",
+        "updatedAt": "2017-02-22T00:28:03.486Z",
+        "id": 4
+      },
+      {
+        "codigo": "405",
+        "piso": "3",
+        "precio": 250,
+        "tipo": "doble",
+        "estado": false,
+        "createdAt": "2017-02-22T00:28:38.236Z",
+        "updatedAt": "2017-02-22T00:28:38.236Z",
+        "id": 5
+      }
+    ],
+    "huespedreserva": [],
+    "reserva": [],
+    "usuario": []
+  },
+  "schema": {
+    "habitacion": {
+      "codigo": {
+        "type": "string"
+      },
+      "piso": {
+        "type": "string"
+      },
+      "precio": {
+        "type": "float"
+      },
+      "tipo": {
+        "type": "string",
+        "enum": [
+          "simple",
+          "doble",
+          "triple"
+        ]
+      },
+      "estado": {
+        "type": "boolean"
+      },
+      "id": {
+        "type": "integer",
+        "autoIncrement": true,
+        "primaryKey": true,
+        "unique": true
+      },
+      "createdAt": {
+        "type": "datetime"
+      },
+      "updatedAt": {
+        "type": "datetime"
+      }
+    },
+    "huespedreserva": {
+      "nombre": {
+        "type": "string"
+      },
+      "correo": {
+        "type": "string"
+      },
+      "idReserva": {
+        "type": "integer",
+        "model": "reserva",
+        "foreignKey": true,
+        "alias": "idReserva"
+      },
+      "id": {
+        "type": "integer",
+        "autoIncrement": true,
+        "primaryKey": true,
+        "unique": true
+      },
+      "createdAt": {
+        "type": "datetime"
+      },
+      "updatedAt": {
+        "type": "datetime"
+      }
+    },
+    "reserva": {
+      "numeroHuespedes": {
+        "type": "string"
+      },
+      "idUsuario": {
+        "type": "integer",
+        "model": "usuario",
+        "foreignKey": true,
+        "alias": "idUsuario"
+      },
+      "idHabitacion": {
+        "type": "integer",
+        "model": "habitacion",
+        "foreignKey": true,
+        "alias": "idHabitacion"
+      },
+      "id": {
+        "type": "integer",
+        "autoIncrement": true,
+        "primaryKey": true,
+        "unique": true
+      },
+      "createdAt": {
+        "type": "datetime"
+      },
+      "updatedAt": {
+        "type": "datetime"
+      }
+    },
+    "usuario": {
+      "nombre": {
+        "type": "string"
+      },
+      "id": {
+        "type": "integer",
+        "autoIncrement": true,
+        "primaryKey": true,
+        "unique": true
+      },
+      "createdAt": {
+        "type": "datetime"
+      },
+      "updatedAt": {
+        "type": "datetime"
+      }
+    }
+  },
+  "counters": {
+    "habitacion": {
+      "id": 5
+    },
+    "huespedreserva": {},
+    "reserva": {},
+    "usuario": {}
+  }
+}
