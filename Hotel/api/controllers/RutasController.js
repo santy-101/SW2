@@ -217,6 +217,71 @@ module.exports = {
 
 
     },
+    
+    
+    informacionReserva: function (req, res){
+        
+
+            var parametros = req.allParams();
+            var numHues;
+        
+            sails.log.info(parametros);
+        
+            for(var i=0; i<parametros.numHuespedes.length; i++){
+                numHues+=parametros.numHuespedes[i];
+            }
+
+            if (parametros.nombres && parametros.apellidos) {
+
+            Usuario.find(
+            {
+                correo:parametros.correo
+            })
+                        .exec(function (errorIndefinido, usuarioEncontrado) {
+
+                            if (errorIndefinido) {
+                                res.view('vistas/Error', {
+                                    error: {
+                                        desripcion: "Hubo un problema carga del usario",
+                                        rawError: errorIndefinido,
+                                        url: "/"
+                                    }
+                                });
+                            }
+                
+                var fechas= req.cookies.busqueda;
+                
+                sails.log.info("Coookie"+fechas);
+
+                          var reservaCrear ={
+                numeroHuespedes:numHues
+                              
+            }
+  
+                        })
+                
+
+
+            } else {
+
+                return res.view('vistas/Error', {
+                    error: {
+                        desripcion: "Llena todos los parametros, apellidos y nombres",
+                        rawError: "Fallo en envio de parametros",
+                        url: "/CrearUsuario"
+                    }
+
+                });
+
+            }
+
+
+         
+        
+        
+    },
+    
+    
 
     setCookieSeleccion: function (req, res) {
         var parametros = req.allParams();

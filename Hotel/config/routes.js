@@ -51,7 +51,8 @@ module.exports.routes = {
         view: 'login'
     },
     
-    'get /seleccionHabitaciones': 'RutasController.seleccionHabitaciones'
+    'get /seleccionHabitaciones': 'RutasController.seleccionHabitaciones',
+    'get /informacionReserva':  'RutasController.informacionReserva'
     
     /***************************************************************************
      *                                                                          *
