@@ -25,8 +25,6 @@ module.exports = {
 
         var parametros = req.allParams();
 
-        sails.log.info(parametros.simple);
-
         if (parametros.fechaInicio >= parametros.fechaSalida) {
             return res.view('vistas/error', {
                 error: {
@@ -74,25 +72,33 @@ module.exports = {
 
             if (parametros.simple == "on" && parametros.doble == "on" && parametros.triple == "on") {
                 objetoBusqueda.tipo = ['simple', 'doble', 'triple'];
+            } else {
+                if (parametros.simple == "on" && parametros.doble == "on" ) {
+                    objetoBusqueda.tipo = ['simple', 'doble'];
+                    sails.log.info("aaaaaaaa");
+                } else {
+                    if (parametros.simple == "on" && parametros.triple == "on") {
+                        objetoBusqueda.tipo = ['simple', 'triple'];
+                    } else {
+                        if (parametros.doble == "on" && parametros.triple == "on") {
+                            objetoBusqueda.tipo = ['doble', 'triple'];
+                        } else {
+                            if (parametros.simple == "on") {
+                                objetoBusqueda.tipo = 'simple';
+                            } else {
+                                if (parametros.doble == "on") {
+                                    objetoBusqueda.tipo = 'doble';
+                                } else {
+                                    if (parametros.triple == "on") {
+                                        objetoBusqueda.tipo = 'triple';
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
             }
-            if (parametros.simple == "on" && parametros.doble == "on" && parametros.triple == "off") {
-                objetoBusqueda.tipo = ['simple', 'doble'];
-            }
-            if (parametros.simple == "on" && parametros.doble == "off" && parametros.triple == "on") {
-                objetoBusqueda.tipo = ['simple', 'triple'];
-            }
-            if (parametros.simple == "off" && parametros.doble == "on" && parametros.triple == "on") {
-                objetoBusqueda.tipo = ['doble', 'triple'];
-            }
-            if (parametros.simple == "on" && parametros.doble == "off" && parametros.triple == "off") {
-                objetoBusqueda.tipo = 'simple';
-            }
-            if (parametros.simple == "on" && parametros.doble == "off" && parametros.triple == "off") {
-                objetoBusqueda.tipo = 'doble';
-            }
-            if (parametros.simple == "on" && parametros.doble == "off" && parametros.triple == "off") {
-                objetoBusqueda.tipo = 'triple';
-            }
+            sails.log.info(objetoBusqueda);
 
             Habitacion.find({
                     where: objetoBusqueda,
@@ -110,13 +116,12 @@ module.exports = {
                             }
                         });
                     } else {
-                        sails.log.info("Hola aquí estoy primero");
-                        sails.log.info(habitaciones);
-                        
-                        var indices= new Array();
+
+
+                        var indices = new Array();
 
                         for (var i = 0; i < habitaciones.length; i++) {
-                            
+
                             for (var j = 0; j < habitaciones[i].Reservas.length; j++) {
 
                                 sails.log.info("Reserva inicio " + habitaciones[i].Reservas[j].fechaInicioReserva.toLocaleDateString());
@@ -130,7 +135,7 @@ module.exports = {
 
                                 var finRes = new Date(habitaciones[i].Reservas[j].fechaFinReserva);
                                 finRes.setDate(finRes.getDate() + 1);
-                                
+
                                 sails.log.info("Iniciooooooo " + inicioRes);
                                 sails.log.info("Salidaaaaaaa " + finRes);
 
@@ -140,24 +145,23 @@ module.exports = {
                                     sails.log.info(habitaciones[i].Reservas[j].fechaInicioReserva);
                                     //j=habitaciones[i].Reservas.length;
                                     //habitaciones.splice(i,1); 
-                                    
+
                                     indices.push(i);
-                                    
+
 
                                 }
 
 
                             }
-                            
-                            
-                            
+
+
+
                         }
-                        for (var i =0 ; i<indices.length;i++)
-                            {
-                                habitaciones.splice(indices[i],1); 
-                            }
-                        
-                        
+                        for (var i = 0; i < indices.length; i++) {
+                            habitaciones.splice(indices[i], 1);
+                        }
+
+
                         sails.log.info(habitaciones);
 
                         return res.view('vistas/habitaciones/habitacionesDisponibles', {
@@ -172,46 +176,46 @@ module.exports = {
 
     },
 
-    
-    seleccionHabitaciones: function(req,res){
-        
+
+    seleccionHabitaciones: function (req, res) {
+
         var parametros = req.allParams();
-        
+
         sails.log.info(parametros.id.length);
-        
-        for (var i=0; i<parametros.id.length; i++){
+
+        for (var i = 0; i < parametros.id.length; i++) {
             sails.log.info(parametros.id[i])
-            
+
         }
-         Habitacion.find({
-                    where: parametros,
-                    sort: 'precio DESC'
-                })
-                .populate("Reservas")
-                .exec(function (err, habitaciones) {
+        Habitacion.find({
+                where: parametros,
+                sort: 'precio DESC'
+            })
+            .populate("Reservas")
+            .exec(function (err, habitaciones) {
 
-                    if (err) {
-                        return res.view('vistas/error', {
-                            error: {
-                                desripcion: "No hay habitaciones disponibles para los parametros ingresados",
-                                rawError: err,
-                                url: "/"
-                            }
-                        });
-                    } else {
-                        
-                        sails.log.info(habitaciones);
+                if (err) {
+                    return res.view('vistas/error', {
+                        error: {
+                            desripcion: "No hay habitaciones disponibles para los parametros ingresados",
+                            rawError: err,
+                            url: "/"
+                        }
+                    });
+                } else {
 
-                        return res.view('vistas/habitaciones/ingresarHuespedes', {
-                            habitaciones: habitaciones
-                        });
-                    }
+                    sails.log.info(habitaciones);
+
+                    return res.view('vistas/habitaciones/ingresarHuespedes', {
+                        habitaciones: habitaciones
+                    });
+                }
 
 
-                });
+            });
 
-        
-        
+
+
     },
 
     setCookieSeleccion: function (req, res) {
