@@ -1,4 +1,3 @@
-
 <link rel="stylesheet" href="misEstilos/busquedaHabitacion.css">
 
 <h1>Habitaciones Seleccionadas </h1>
@@ -41,8 +40,27 @@
                 <br>
                 <br>
                 <div class="form-group">
-                    <label>Número de huespedes : </label>
-                    <input class="form-control" type="number" name="numNiños" value="1" min="1" max="2">
+
+                        <% if (habitaciones[i].tipo=="simple") {%>
+                            <label>Número de huespedes : </label>
+                            <input class="form-control" type="number" name="numHuespedes" value="1" min="1" max="2">
+
+                            <%}%>
+                                <% if (habitaciones[i].tipo=="doble") {%>
+                                    <label>Número de huespedes : </label>
+                                    <input class="form-control" type="number" name="numHuespedes" value="1" min="1" max="4">
+                                    <%}%>
+                                        <% if (habitaciones[i].tipo=="triple") {%>
+                                            <label>Número de huespedes : </label>
+                                            <input class="form-control" type="number" name="numHuespedes" value="1" min="1" max="6">
+
+                                            <%}%>
+
+
+
+
+
+
                 </div>
             </div>
         </div>
