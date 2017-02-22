@@ -8,13 +8,28 @@
 module.exports = {
 
   attributes: {
-      nombre:{
-          type:"string"
+      
+      nombres:{
+          type:"string",
+          required:true
       },
-//      reservas:{
-//          collection:"Reserva",
-//          via:"idUsuario"
-//      }
+      
+      apellidos: {
+          type:"string",
+          required:true
+      },
+      
+      correo:{
+          type:"email",
+          unique :true,
+          required:true
+          
+      },
+      
+      reservas:{
+          collection:"Reserva",
+          via:"idUsuario"
+      }
 
   }
 };

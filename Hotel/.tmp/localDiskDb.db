@@ -263,8 +263,15 @@
       }
     },
     "usuario": {
-      "nombre": {
+      "nombres": {
         "type": "string"
+      },
+      "apellidos": {
+        "type": "string"
+      },
+      "correo": {
+        "type": "string",
+        "unique": true
       },
       "id": {
         "type": "integer",

@@ -41,43 +41,55 @@
                 <br>
                 <div class="form-group">
 
-                        <% if (habitaciones[i].tipo=="simple") {%>
-                            <label>Número de huespedes : </label>
-                            <input class="form-control" type="number" name="numHuespedes" value="1" min="1" max="2">
+                    <% if (habitaciones[i].tipo=="simple") {%>
+                        <label>Número de huespedes : </label>
+                        <input class="form-control" type="number" name="numHuespedes" value="1" min="1" max="2">
 
-                            <%}%>
-                                <% if (habitaciones[i].tipo=="doble") {%>
-                                    <label>Número de huespedes : </label>
-                                    <input class="form-control" type="number" name="numHuespedes" value="1" min="1" max="4">
-                                    <%}%>
-                                        <% if (habitaciones[i].tipo=="triple") {%>
-                                            <label>Número de huespedes : </label>
-                                            <input class="form-control" type="number" name="numHuespedes" value="1" min="1" max="6">
+                        <%}%>
+                            <% if (habitaciones[i].tipo=="doble") {%>
+                                <label>Número de huespedes : </label>
+                                <input class="form-control" type="number" name="numHuespedes" value="1" min="1" max="4">
+                                <%}%>
+                                    <% if (habitaciones[i].tipo=="triple") {%>
+                                        <label>Número de huespedes : </label>
+                                        <input class="form-control" type="number" name="numHuespedes" value="1" min="1" max="6">
 
-                                            <%}%>
-
-
-
-
-
-
+                                        <%}%>
                 </div>
             </div>
         </div>
 
         <% }%>
+            
+            <br>
 
+            <h3>Datos del Responsable de la Reserva</h3>
 
+            <div class="form-group">
+                <label>Nombres (*)</label>
+                <input type="text" class="form-control" placeholder="Ingrese sus Nombres " name="nombres" required>
+            </div>
+
+            <div class="form-group">
+                <label>Apellidos(*)</label>
+                <input type="text" class="form-control" placeholder="Ingrese sus Apellidos " name="apellidos" required>
+            </div>
+
+            <div class="form-group">
+                <label>Correo(*)</label>
+                <input type="email" class="form-control" name="correo" required>
+            </div>
             <br>
 
             <center>
 
                 <button type="submit" class="btn btn-success btn-lg">Continuar con la reserva </button>
             </center>
-            <!--
+
 </form>
 
-    
+
+<!--
     
     <form action="" method="post">
 
