@@ -25,6 +25,8 @@ module.exports = {
 
         var parametros = req.allParams();
 
+        //  sails.log.info("Parametrosssssss11111111 " + parametros);
+
         if (parametros.fechaInicio >= parametros.fechaSalida) {
             return res.view('vistas/error', {
                 error: {
@@ -37,22 +39,20 @@ module.exports = {
 
             //guardar cookies
 
-            var fechas=
-                
-            {
-                fechaInicial:parametros.fechaInicio,
-                fechaFinal:parametros.fechaSalida
-            }
+            //            var fechas =
+            //
+            //                {
+            //                    fechaInicial: parametros.fechaInicio,
+            //                    fechaFinal: parametros.fechaSalida
+            //                }
 
-            var parametros = req.allParams();
+
 
             var busquedaCookie = req.cookies.busqueda;
 
-            sails.log.info(parametros.fechaInicio);
-
-            sails.log.info(parametros.fechaSalida);
-
-            sails.log.info(busquedaCookie);
+            // sails.log.info(parametros.fechaInicio);
+            //            sails.log.info(parametros.fechaSalida);
+            //        sails.log.info(busquedaCookie);
 
             var nuevaBusqueda = {
                 fechaInicio: parametros.fechaInicio,
@@ -61,8 +61,8 @@ module.exports = {
 
             if (busquedaCookie) {
 
-                sails.log.info("reservaCookie");
-                sails.log.info(busquedaCookie);
+                //sails.log.info("reservaCookie");
+                //sails.log.info(busquedaCookie);
 
                 res.clearCookie('busqueda');
 
@@ -78,7 +78,7 @@ module.exports = {
             if (parametros.simple == "on" && parametros.doble == "on" && parametros.triple == "on") {
                 objetoBusqueda.tipo = ['simple', 'doble', 'triple'];
             } else {
-                if (parametros.simple == "on" && parametros.doble == "on" ) {
+                if (parametros.simple == "on" && parametros.doble == "on") {
                     objetoBusqueda.tipo = ['simple', 'doble'];
                     sails.log.info("aaaaaaaa");
                 } else {
@@ -103,7 +103,7 @@ module.exports = {
                     }
                 }
             }
-            sails.log.info(objetoBusqueda);
+            //sails.log.info(objetoBusqueda);
 
             Habitacion.find({
                     where: objetoBusqueda,
@@ -129,10 +129,10 @@ module.exports = {
 
                             for (var j = 0; j < habitaciones[i].Reservas.length; j++) {
 
-                                sails.log.info("Reserva inicio " + habitaciones[i].Reservas[j].fechaInicioReserva.toLocaleDateString());
-                                sails.log.info("Reserva fin " + habitaciones[i].Reservas[j].fechaFinReserva.toLocaleDateString());
-                                sails.log.info("Inicio " + parametros.fechaInicio);
-                                sails.log.info("Salida " + parametros.fechaSalida);
+                                //sails.log.info("Reserva inicio " + habitaciones[i].Reservas[j].fechaInicioReserva.toLocaleDateString());
+                                //sails.log.info("Reserva fin " + habitaciones[i].Reservas[j].fechaFinReserva.toLocaleDateString());
+                                //sails.log.info("Inicio " + parametros.fechaInicio);
+                                //sails.log.info("Salida " + parametros.fechaSalida);
 
 
                                 var inicioRes = new Date(habitaciones[i].Reservas[j].fechaInicioReserva);
@@ -141,15 +141,15 @@ module.exports = {
                                 var finRes = new Date(habitaciones[i].Reservas[j].fechaFinReserva);
                                 finRes.setDate(finRes.getDate() + 1);
 
-                                sails.log.info("Iniciooooooo " + inicioRes);
-                                sails.log.info("Salidaaaaaaa " + finRes);
+                                //sails.log.info("Iniciooooooo " + inicioRes);
+                                //sails.log.info("Salidaaaaaaa " + finRes);
 
                                 if (parametros.fechaInicio <= finRes.toLocaleDateString() && inicioRes.toLocaleDateString() <= parametros.fechaSalida) {
 
-                                    sails.log.info("Holaaaaa" + habitaciones[i].Reservas[j].fechaInicioReserva.toLocaleDateString());
-                                    sails.log.info(habitaciones[i].Reservas[j].fechaInicioReserva);
+                                    //sails.log.info("Holaaaaa" + habitaciones[i].Reservas[j].fechaInicioReserva.toLocaleDateString());
+                                    //sails.log.info(habitaciones[i].Reservas[j].fechaInicioReserva);
                                     //j=habitaciones[i].Reservas.length;
-                                    //habitaciones.splice(i,1); 
+                                    habitaciones.splice(i, 1);
 
                                     indices.push(i);
 
@@ -167,10 +167,10 @@ module.exports = {
                         }
 
 
-                        sails.log.info(habitaciones);
+                        //    sails.log.info(habitaciones);
 
                         return res.view('vistas/habitaciones/habitacionesDisponibles', {
-                            habitaciones: habitaciones, fechas
+                            habitaciones: habitaciones
                         });
                     }
 
@@ -185,12 +185,18 @@ module.exports = {
     seleccionHabitaciones: function (req, res) {
 
         var parametros = req.allParams();
-             
-        var fechas= {
-                fechaInicial:parametros.fechaInicial,
-                fechaFinal:parametros.fechaFinal
-            }
-        
+
+        // sails.log.info("Parametrosssssss " + parametros);
+
+
+        //        var fechas = {
+        //            fechaInicial: parametros.fechaInicial,
+        //            fechaFinal: parametros.fechaFinal
+        //        }
+
+        // sails.log.info("Parametros");
+
+
         Habitacion.find({
                 where: parametros,
                 sort: 'precio DESC'
@@ -208,79 +214,112 @@ module.exports = {
                     });
                 } else {
 
-                    sails.log.info(habitaciones);
-                    sails.log.info("fechas");
+                    // sails.log.info(habitaciones);
+                    //                    sails.log.info("fechas" + fechas);
 
-                    return res.view('vistas/habitaciones/ingresarHuespedes', {habitaciones: habitaciones, fechas});
+                    return res.view('vistas/habitaciones/ingresarHuespedes', {
+                        habitaciones: habitaciones
+                    });
                 }
-        }
-},
-    
-    
-    informacionReserva: function (req, res){
-        
 
-            var parametros = req.allParams();
-            var numHues;
-        
-            sails.log.info(parametros);
-        
-            for(var i=0; i<parametros.numHuespedes.length; i++){
-                numHues+=parametros.numHuespedes[i];
-            }
-
-            if (parametros.nombres && parametros.apellidos) {
-
-            Usuario.find(
-            {
-                correo:parametros.correo
             })
-                        .exec(function (errorIndefinido, usuarioEncontrado) {
-
-                            if (errorIndefinido) {
-                                res.view('vistas/Error', {
-                                    error: {
-                                        desripcion: "Hubo un problema carga del usario",
-                                        rawError: errorIndefinido,
-                                        url: "/"
-                                    }
-                                });
-                            }
-                
-                var fechas= req.cookies.busqueda;
-                
-                sails.log.info("Coookiessss"+req.cookies.busqueda);
-                sails.log.info("Coookie"+fechas);
-
-                          var reservaCrear ={
-                numeroHuespedes:numHues
-                              
-            }
-  
-                        })
-                
+    },
 
 
-            } else {
+    informacionReserva: function (req, res) {
 
-                return res.view('vistas/Error', {
-                    error: {
-                        desripcion: "Llena todos los parametros, apellidos y nombres",
-                        rawError: "Fallo en envio de parametros",
-                        url: "/CrearUsuario"
+        var parametros = req.allParams();
+        var misCookies;
+        sails.log.info("Parametros: " + parametros);
+        sails.log.info("Mis cookies: " + parametros.cookiess);
+        sails.log.info("Mis cookies: " + req.cookies.busqueda());
+        sails.log.info("Mis cookies: " + req.cookies.busqueda());
+
+        //        var fechas = {
+        //            fechaInicial: parametros.fechaInicial,
+        //            fechaFinal: parametros.fechaFinal
+        //        }
+        var indices = parametros.ides;
+
+        sails.log.info(parametros);
+
+        var numHues = 0;
+
+        for (var i = 0; i < parametros.numHuespedes.length; i++) {
+            numHues += (parametros.numHuespedes[i] * 1);
+        }
+
+        sails.log.info("Numero de huespedes: " + numHues);
+
+        Usuario.findOne({
+                correo: parametros.correo
+            })
+            .exec(function (errorIndefinido, usuarioEncontrado) {
+
+                if (errorIndefinido) {
+                    res.view('vistas/Error', {
+                        error: {
+                            desripcion: "Hubo un problema carga del usario",
+                            rawError: errorIndefinido,
+                            url: "/"
+                        }
+                    });
+                }
+            
+                if(!usuarioEncontrado){
+                    res.view('vistas/Error', {
+                        error: {
+                            desripcion: "Usuario no encontrado",
+                            rawError: errorIndefinido,
+                            url: "/"
+                        }
+                    });
+                }
+            
+                sails.log.info("Usuario "+usuarioEncontrado);
+                for (var i = 0; i < indices.length; i++) {
+
+
+                    var reservaCrear = {
+                        numeroHuespedes: numHues,
+                        fechaInicialReserva: parametros.fechaInicial,
+                        fechaFinReserva: parametros.fechaFinal,
+                        idUsuario: usuarioEncontrado.id,
+                        idHabitacion: indices[i]
+
                     }
 
-                });
+                    Habitacion.create(reservaCrear).exec(function (err, habitacionCreada) {
+//                        if (err) {
+//                            return res.view('vistas/Error', {
+//                                error: {
+//                                    desripcion: "Fallo al crear la Reserva",
+//                                    rawError: err,
+//                                    url: "/CrearUsuario"
+//                                }
+//
+//                            });
+//                        }
+                        
+                        
+                        
+                        sails.log.info("Reserva  "+reservaCrear);
 
-            }
+
+                    })
+                }
+//                return res.view('vistas/habitaciones/informacionHuespedes', {
+//                    numHues, indices
+//                });
+
+            })
 
 
-         
-        
-        
+
+
     },
-    
-    
+
+
 
     setCookieSeleccion: function (req, res) {
         var parametros = req.allParams();
@@ -333,11 +372,14 @@ module.exports = {
     },
 
     getCookieHabitacion: function (req, res) {
-        res.ok(req.cookies.busqueda);
-        return res.send(200);
+        //res.ok(req.cookies.busqueda);
+        
+        var co=req.cookies.busqueda;
+        sails.log.info(co);
+        return res.ok(co);
 
 
-    },  
+    },
 
 
     deleteCookieHabitacion: function (req, res) {

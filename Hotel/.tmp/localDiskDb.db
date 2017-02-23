@@ -163,6 +163,22 @@
         "createdAt": "2017-02-22T16:34:54.941Z",
         "updatedAt": "2017-02-22T16:34:54.941Z",
         "id": 3
+      },
+      {
+        "nombres": "Belen",
+        "apellidos": "Quispi",
+        "correo": "mbaqs_24@live.com",
+        "createdAt": "2017-02-23T09:43:13.725Z",
+        "updatedAt": "2017-02-23T09:43:13.725Z",
+        "id": 4
+      },
+      {
+        "nombres": "Aracely",
+        "apellidos": "Sotamba",
+        "correo": "mbaqs1994@gmail.com",
+        "createdAt": "2017-02-23T09:43:48.632Z",
+        "updatedAt": "2017-02-23T09:43:48.632Z",
+        "id": 5
       }
     ]
   },
@@ -296,7 +312,7 @@
       "id": 7
     },
     "usuario": {
-      "id": 3
+      "id": 5
     }
   }
 }

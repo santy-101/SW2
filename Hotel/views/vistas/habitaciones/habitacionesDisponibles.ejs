@@ -6,8 +6,6 @@
 <form action="/seleccionHabitaciones" method="GET">
     <br>
     <br>
-    <input type="hidden" name="fechaInicial" value="<%=fechas.fechaInicial %>">
-    <input type="hidden" name="fechaSalida" value="<%= fechas.fechaFinal %>">
     <% for(var i=0; i<habitaciones.length; i++) {%>
         <div class="row">
 
@@ -52,11 +50,13 @@
 
 
             <br>
-
+<!--
+         
+-->
             <center>
 
                 <button type="submit" class="btn btn-success btn-lg">Continuar con la reserva </button>
-<!--                <input class="btn-checkout" type="submit" value="Secure Checkout" id="submitBtn" disabled="disabled"/>-->
+                <!--                <input class="btn-checkout" type="submit" value="Secure Checkout" id="submitBtn" disabled="disabled"/>-->
             </center>
 </form>
 
@@ -85,12 +85,12 @@
 
 
 <script>
-    $('form').submit(function(e) {
+    $('form').submit(function (e) {
         if ($('input[type=checkbox]:checked').length === 0) {
             e.preventDefault();
-            
+
             alert("Debe seleccionar al menos una habitacion!");
-             
+
         }
     });
 </script>

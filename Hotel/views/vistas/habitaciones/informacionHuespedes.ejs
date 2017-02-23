@@ -1,1 +1,37 @@
 <link rel="stylesheet" href="misEstilos/busquedaHabitacion.css">
+
+<h1>Información de los huespedes </h1>
+
+<form action="/pagoReserva" method="GET">
+    <br>
+
+    <% for (var i=0; i<numhues; i++) {%>
+
+        <div class="row">
+            <h3>Datos de huesped <%=(i+1)%></h3>
+
+            <div class="form-group">
+                <label>Nombres (*)</label>
+                <input type="text" class="form-control" placeholder="Ingrese sus Nombres " name="nombres<%=i%>" required>
+            </div>
+
+            <div class="form-group">
+                <label>Apellidos(*)</label>
+                <input type="text" class="form-control" placeholder="Ingrese sus Apellidos " name="apellidos<%=i%>" required>
+            </div>
+
+            <div class="form-group">
+                <label>Correo(*)</label>
+                <input type="email" class="form-control" name="correo<%=i%>" required>
+            </div>
+
+        </div>
+        <%}%>
+             <br>
+           <center>
+
+                <button type="submit" class="btn btn-success btn-lg">Finalizar la reserva </button>
+            </center>
+
+          
+</form>

@@ -7,6 +7,7 @@
 <form action="/informacionReserva" method="GET">
     <br>
     <br>
+
     <% for(var i=0; i<habitaciones.length; i++) {%>
         <div class="row">
 
@@ -28,6 +29,7 @@
                 <br>
                 <br>
                 <br>
+                <input type="hidden" name="ides" value="<%= habitaciones[i].id%>">
                 <h3 style="color:black">Tipo de habitación: <%= habitaciones[i].tipo%></h3>
                 <h3 style="color:black">Codigo de la Habitación: <%= habitaciones[i].codigo%></h3>
                 <h3 style="color:black">Precio: <%= habitaciones[i].precio%></h3>
@@ -80,6 +82,8 @@
                 <input type="email" class="form-control" name="correo" required>
             </div>
             <br>
+            
+            <input type="hidden" name="cookiess" value="<%req.cookies.busqueda%>">
 
             <center>
 
