@@ -9,13 +9,16 @@ module.exports = {
 
     attributes: {
         numeroHuespedes: {
-            type: "string"
+            type: "string",
+            required true
         },
         fechaInicioReserva: {
-            type: "date"
+            type: "date",
+            required true
         },
         fechaFinReserva: {
-            type: "date"
+            type: "date",
+            required true
         },
         idUsuario: {
             model: "Usuario"

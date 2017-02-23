@@ -236,8 +236,8 @@ module.exports = {
 
         var parametros = req.allParams();
         var misCookies;
-        var fechInicial = req.cookies.busqueda[0].fechaInicio;
-        var fechFinal = req.cookies.busqueda[0].fechaSalida;
+        var fechInicial = Date.parse(req.cookies.busqueda[0].fechaInicio);
+        var fechFinal = Date.parse(req.cookies.busqueda[0].fechaSalida);
         sails.log.info("Mis cookiessssssssssaaa: " + fechInicial);
         sails.log.info("Mis cookiessssssssssss: " + fechFinal);
 
@@ -259,7 +259,6 @@ module.exports = {
                 correo: parametros.correo
 
             })
-            .populate("Reservas")
             .exec(function (errorIndefinido, usuarioEncontrado) {
 
                 if (errorIndefinido) {
@@ -289,7 +288,7 @@ module.exports = {
 
                     var reservaCrear = {
                         numeroHuespedes: numerosHues,
-                        fechaInicialReserva: fechInicial,
+                        fechaInicialReserva: Date.parse(fechInicial),
                         fechaFinReserva: fechFinal,
                         idUsuario: usuarioEncontrado.id,
                         idHabitacion: indices[i]
