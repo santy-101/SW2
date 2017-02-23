@@ -124,7 +124,8 @@ module.exports = {
                             }
                         });
                     } else {
-
+                        
+                        sails.log.info(habitaciones);
 
                         var indices = new Array();
 
@@ -137,7 +138,7 @@ module.exports = {
                                 //                                sails.log.info("Inicio " + parametros.fechaInicio);
                                 //                                sails.log.info("Salida " + parametros.fechaSalida);
 
-                                sails.log.info("Iniciooooooo11111 " + habitaciones[i].Reservas[j].fechaInicioReserva);
+                               // sails.log.info("Iniciooooooo11111 " + habitaciones[i].Reservas[j].fechaInicioReserva);
 
                                 var inicioRes = new Date(habitaciones[i].Reservas[j].fechaInicioReserva);
                                 inicioRes.setDate(inicioRes.getDate() + 1);
@@ -145,17 +146,21 @@ module.exports = {
                                 var finRes = new Date(habitaciones[i].Reservas[j].fechaFinReserva);
                                 finRes.setDate(finRes.getDate() + 1);
 
-                                sails.log.info("Iniciooooooo " + inicioRes);
-                                sails.log.info("Salidaaaaaaa " + finRes);
+//                                sails.log.info("Iniciooooooo " + inicioRes);
+//                                sails.log.info("Salidaaaaaaa " + finRes);
 
                                 if (parametros.fechaInicio <= finRes.toLocaleDateString() && inicioRes.toLocaleDateString() <= parametros.fechaSalida) {
 
                                     sails.log.info("Holaaaaa" + habitaciones[i].Reservas[j].fechaInicioReserva.toLocaleDateString());
                                     sails.log.info(habitaciones[i].Reservas[j].fechaInicioReserva);
+                                    
+                                    indices.push(habitaciones[i].id);
                                     //j=habitaciones[i].Reservas.length;
                                    // habitaciones.splice(i, 1);
+                                    
+                                    sails.log.info("iiiiiiiiiiiiiiii"+i)
 
-                                    indices.push(i);
+                                    //indices.push(i);
 
 
                                 }
@@ -167,7 +172,21 @@ module.exports = {
 
                         }
                         for (var i = 0; i < indices.length; i++) {
-                            habitaciones.splice(indices[i], 1);
+                            
+                            var index=-1;
+                            
+                            for(var j=0; j<habitaciones.length; j++ )
+                                {
+                                    if(habitaciones[j].id==indices[i])
+                                        {
+                                            index=j;
+                                        }
+                                }
+                            
+                            
+                            habitaciones.splice(index, 1);
+                            
+                            
                         }
 
 
@@ -338,6 +357,14 @@ module.exports = {
 
 
 
+    },
+    
+    
+    pagoReserva : function(req, res){
+     
+                return res.view('vistas/habitaciones/pagoReserva', {
+                
+                });  
     },
 
 
