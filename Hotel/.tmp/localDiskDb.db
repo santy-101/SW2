@@ -75,24 +75,14 @@
     "huespedreserva": [],
     "reserva": [
       {
-        "numeroHuespedes": "2",
+        "numeroHuespedes": "1",
         "fechaInicioReserva": "2017-02-23T00:00:00.000Z",
-        "fechaFinReserva": "2017-02-25T00:00:00.000Z",
+        "fechaFinReserva": "2017-02-26T00:00:00.000Z",
         "idUsuario": 4,
-        "idHabitacion": 4,
-        "createdAt": "2017-02-23T15:32:39.753Z",
-        "updatedAt": "2017-02-23T15:32:39.753Z",
-        "id": 19
-      },
-      {
-        "numeroHuespedes": "2",
-        "fechaInicioReserva": "2017-02-23T00:00:00.000Z",
-        "fechaFinReserva": "2017-02-25T00:00:00.000Z",
-        "idUsuario": 4,
-        "idHabitacion": 3,
-        "createdAt": "2017-02-23T15:32:39.769Z",
-        "updatedAt": "2017-02-23T15:32:39.769Z",
-        "id": 20
+        "idHabitacion": 1,
+        "createdAt": "2017-02-23T17:04:55.246Z",
+        "updatedAt": "2017-02-23T17:04:55.246Z",
+        "id": 22
       }
     ],
     "usuario": [
@@ -259,7 +249,7 @@
     },
     "huespedreserva": {},
     "reserva": {
-      "id": 20
+      "id": 22
     },
     "usuario": {
       "id": 5

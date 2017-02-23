@@ -285,7 +285,7 @@ module.exports = {
             .exec(function (errorIndefinido, usuarioEncontrado) {
 
                 if (errorIndefinido) {
-                    res.view('vistas/Error', {
+                    res.view('vistas/error', {
                         error: {
                             desripcion: "Hubo un problema carga del usario",
                             rawError: errorIndefinido,
@@ -295,7 +295,7 @@ module.exports = {
                 }
 
                 if (!usuarioEncontrado) {
-                    res.view('vistas/Error', {
+                    res.view('vistas/error', {
                         error: {
                             desripcion: "Usuario no encontrado",
                             rawError: errorIndefinido,
@@ -326,7 +326,7 @@ module.exports = {
                     Reserva.create(reservaCrear).exec(function (err, reservaCreada) {
 
                         if (err) {
-                            res.view('vistas/Error', {
+                            res.view('vistas/error', {
                                 error: {
                                     desripcion: "Hubo un problema carga del usario",
                                     rawError: err,
