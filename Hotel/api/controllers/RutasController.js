@@ -37,7 +37,12 @@ module.exports = {
 
             //guardar cookies
 
-
+            var fechas=
+                
+            {
+                fechaInicial:parametros.fechaInicio,
+                fechaFinal:parametros.fechaSalida
+            }
 
             var parametros = req.allParams();
 
@@ -165,7 +170,7 @@ module.exports = {
                         sails.log.info(habitaciones);
 
                         return res.view('vistas/habitaciones/habitacionesDisponibles', {
-                            habitaciones: habitaciones
+                            habitaciones: habitaciones, fechas
                         });
                     }
 
@@ -180,13 +185,12 @@ module.exports = {
     seleccionHabitaciones: function (req, res) {
 
         var parametros = req.allParams();
-
-        sails.log.info(parametros.id.length);
-
-        for (var i = 0; i < parametros.id.length; i++) {
-            sails.log.info(parametros.id[i])
-
-        }
+             
+        var fechas= {
+                fechaInicial:parametros.fechaInicial,
+                fechaFinal:parametros.fechaFinal
+            }
+        
         Habitacion.find({
                 where: parametros,
                 sort: 'precio DESC'
@@ -205,20 +209,12 @@ module.exports = {
                 } else {
 
                     sails.log.info(habitaciones);
+                    sails.log.info("fechas");
 
-                    return res.view('vistas/habitaciones/ingresarHuespedes', {
-                        habitaciones: habitaciones, 
-                        fechaInicio:res.cookies.busqueda.fechaInicio,
-                        fechaInicio:res.cookies.busqueda.fechaInicio
-                    });
+                    return res.view('vistas/habitaciones/ingresarHuespedes', {habitaciones: habitaciones, fechas});
                 }
-
-
-            });
-
-
-
-    },
+        }
+},
     
     
     informacionReserva: function (req, res){

@@ -6,6 +6,8 @@
 <form action="/seleccionHabitaciones" method="GET">
     <br>
     <br>
+    <input type="hidden" name="fechaInicial" value="<%=fechas.fechaInicial %>">
+    <input type="hidden" name="fechaSalida" value="<%= fechas.fechaFinal %>">
     <% for(var i=0; i<habitaciones.length; i++) {%>
         <div class="row">
 
