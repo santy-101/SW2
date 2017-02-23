@@ -52,7 +52,9 @@ module.exports.routes = {
     },
     
     'get /seleccionHabitaciones': 'RutasController.seleccionHabitaciones',
-    'get /informacionReserva':  'RutasController.informacionReserva'
+    'get /informacionReserva':  'RutasController.informacionReserva',
+    
+    'get /pagoReserva': 'RutasController.pagoReserva'
     
     /***************************************************************************
      *                                                                          *

@@ -41,7 +41,7 @@
 
             <div class="form-group">
                 <label> Fecha de Inicio: </label>
-                <input class="form-control" type="date" name="fechaInicio" id="theDate" required>
+                <input class="form-control" type="date" name="fechaInicio" id="fechaInicio" required>
             </div>
 
             <div class="form-group">
@@ -72,7 +72,7 @@
     if (day < 10) day = "0" + day;
     var today = year + "-" + month + "-" + day;
 
-    document.getElementById("theDate").min = today;
+    document.getElementById("fechaInicio").min = today;
     var tomorrow = year + "-" + month + "-" + (day + 1);
     document.getElementById("fechaSalida").min = tomorrow;
 
@@ -81,7 +81,7 @@
         result.setDate(result.getDate() + days);
         return result;
     }
-    localStorage.setItem("fechaInicio", "dato")
+    //localStorage.setItem("fechaInicio", "dato")
 </script>
 
 

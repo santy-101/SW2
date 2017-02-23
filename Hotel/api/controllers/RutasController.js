@@ -55,8 +55,9 @@ module.exports = {
             //        sails.log.info(busquedaCookie);
 
             var nuevaBusqueda = {
+                nombre: 'cookie',
                 fechaInicio: parametros.fechaInicio,
-                fechaSalida: parametros.fechaSalida,
+                fechaSalida: parametros.fechaSalida
             }
 
             if (busquedaCookie) {
@@ -131,11 +132,12 @@ module.exports = {
 
                             for (var j = 0; j < habitaciones[i].Reservas.length; j++) {
 
-                                //sails.log.info("Reserva inicio " + habitaciones[i].Reservas[j].fechaInicioReserva.toLocaleDateString());
-                                //sails.log.info("Reserva fin " + habitaciones[i].Reservas[j].fechaFinReserva.toLocaleDateString());
-                                //sails.log.info("Inicio " + parametros.fechaInicio);
-                                //sails.log.info("Salida " + parametros.fechaSalida);
+                                //                                sails.log.info("Reserva inicio " + habitaciones[i].Reservas[j].fechaInicioReserva.toLocaleDateString());
+                                //                                sails.log.info("Reserva fin " + habitaciones[i].Reservas[j].fechaFinReserva.toLocaleDateString());
+                                //                                sails.log.info("Inicio " + parametros.fechaInicio);
+                                //                                sails.log.info("Salida " + parametros.fechaSalida);
 
+                                sails.log.info("Iniciooooooo11111 " + habitaciones[i].Reservas[j].fechaInicioReserva);
 
                                 var inicioRes = new Date(habitaciones[i].Reservas[j].fechaInicioReserva);
                                 inicioRes.setDate(inicioRes.getDate() + 1);
@@ -143,15 +145,15 @@ module.exports = {
                                 var finRes = new Date(habitaciones[i].Reservas[j].fechaFinReserva);
                                 finRes.setDate(finRes.getDate() + 1);
 
-                               sails.log.info("Iniciooooooo " + inicioRes);
-                               sails.log.info("Salidaaaaaaa " + finRes);
+                                sails.log.info("Iniciooooooo " + inicioRes);
+                                sails.log.info("Salidaaaaaaa " + finRes);
 
                                 if (parametros.fechaInicio <= finRes.toLocaleDateString() && inicioRes.toLocaleDateString() <= parametros.fechaSalida) {
 
                                     sails.log.info("Holaaaaa" + habitaciones[i].Reservas[j].fechaInicioReserva.toLocaleDateString());
                                     sails.log.info(habitaciones[i].Reservas[j].fechaInicioReserva);
                                     //j=habitaciones[i].Reservas.length;
-                                    habitaciones.splice(i, 1);
+                                   // habitaciones.splice(i, 1);
 
                                     indices.push(i);
 
@@ -169,7 +171,7 @@ module.exports = {
                         }
 
 
-                        sails.log.info("1111111111111111111122222222222",habitaciones);
+                        sails.log.info("1111111111111111111122222222222", habitaciones);
 
                         var co = req.cookies.busqueda;
                         sails.log.info("Coooooooo: " + co);
@@ -236,8 +238,10 @@ module.exports = {
 
         var parametros = req.allParams();
         var misCookies;
-        var fechInicial = Date.parse(req.cookies.busqueda[0].fechaInicio);
-        var fechFinal = Date.parse(req.cookies.busqueda[0].fechaSalida);
+        //        var fechInicial = Date.parse(req.cookies.busqueda[0].fechaInicio);
+        //        var fechFinal = Date.parse(req.cookies.busqueda[0].fechaSalida);
+        var fechInicial = req.cookies.busqueda[0].fechaInicio;
+        var fechFinal = req.cookies.busqueda[0].fechaSalida;
         sails.log.info("Mis cookiessssssssssaaa: " + fechInicial);
         sails.log.info("Mis cookiessssssssssss: " + fechFinal);
 
@@ -288,7 +292,7 @@ module.exports = {
 
                     var reservaCrear = {
                         numeroHuespedes: numerosHues,
-                        fechaInicialReserva: Date.parse(fechInicial),
+                        fechaInicioReserva: fechInicial,
                         fechaFinReserva: fechFinal,
                         idUsuario: usuarioEncontrado.id,
                         idHabitacion: indices[i]
@@ -300,17 +304,32 @@ module.exports = {
                     sails.log.info("Reserva  " + reservaCrear.idUsuario);
                     sails.log.info("Reserva  " + reservaCrear.idHabitacion);
 
-                    Reserva.create(reservaCrear).exec(function (err, habitacionCreada) {
+                    Reserva.create(reservaCrear).exec(function (err, reservaCreada) {
 
-                        sails.log.info("Reserva 1 " + habitacionCreada);
+                        if (err) {
+                            res.view('vistas/Error', {
+                                error: {
+                                    desripcion: "Hubo un problema carga del usario",
+                                    rawError: err,
+                                    url: "/"
+                                }
+                            });
+                        }
+                        
+                        if(reservaCreada)
+                            {
+                                
+                            }
+                        sails.log.info("Reserva 1 " + reservaCreada);
 
                     })
                 }
 
-            
-            sails.log.info("Ya termino" + numerosHues);
+
+                sails.log.info("Ya termino" + numerosHues);
                 return res.view('vistas/habitaciones/informacionHuespedes', {
-                    numerosHues:numerosHues, indices:indices
+                    numerosHues: numerosHues,
+                    indices: indices
                 });
 
             })
