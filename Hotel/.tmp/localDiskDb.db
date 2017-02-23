@@ -143,6 +143,16 @@
         "createdAt": "2017-02-22T16:40:29.589Z",
         "updatedAt": "2017-02-22T16:40:29.589Z",
         "id": 7
+      },
+      {
+        "numeroHuespedes": "1",
+        "fechaInicialReserva": "2017-02-23",
+        "fechaFinReserva": "2017-02-25T00:00:00.000Z",
+        "idUsuario": 4,
+        "idHabitacion": 1,
+        "createdAt": "2017-02-23T11:12:27.159Z",
+        "updatedAt": "2017-02-23T11:12:27.159Z",
+        "id": 12
       }
     ],
     "usuario": [
@@ -309,7 +319,7 @@
     },
     "huespedreserva": {},
     "reserva": {
-      "id": 7
+      "id": 12
     },
     "usuario": {
       "id": 5

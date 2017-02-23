@@ -65,6 +65,7 @@ module.exports = {
                 //sails.log.info(busquedaCookie);
 
                 res.clearCookie('busqueda');
+                res.cookie('busqueda', [nuevaBusqueda]);
 
             } else {
 
@@ -72,6 +73,7 @@ module.exports = {
 
             }
 
+            sails.log.info("Cooooooooaaaa: " + req.cookies.busqueda);
 
             var objetoBusqueda = {}
 
@@ -141,13 +143,13 @@ module.exports = {
                                 var finRes = new Date(habitaciones[i].Reservas[j].fechaFinReserva);
                                 finRes.setDate(finRes.getDate() + 1);
 
-                                //sails.log.info("Iniciooooooo " + inicioRes);
-                                //sails.log.info("Salidaaaaaaa " + finRes);
+                               sails.log.info("Iniciooooooo " + inicioRes);
+                               sails.log.info("Salidaaaaaaa " + finRes);
 
                                 if (parametros.fechaInicio <= finRes.toLocaleDateString() && inicioRes.toLocaleDateString() <= parametros.fechaSalida) {
 
-                                    //sails.log.info("Holaaaaa" + habitaciones[i].Reservas[j].fechaInicioReserva.toLocaleDateString());
-                                    //sails.log.info(habitaciones[i].Reservas[j].fechaInicioReserva);
+                                    sails.log.info("Holaaaaa" + habitaciones[i].Reservas[j].fechaInicioReserva.toLocaleDateString());
+                                    sails.log.info(habitaciones[i].Reservas[j].fechaInicioReserva);
                                     //j=habitaciones[i].Reservas.length;
                                     habitaciones.splice(i, 1);
 
@@ -167,7 +169,10 @@ module.exports = {
                         }
 
 
-                        //    sails.log.info(habitaciones);
+                        sails.log.info("1111111111111111111122222222222",habitaciones);
+
+                        var co = req.cookies.busqueda;
+                        sails.log.info("Coooooooo: " + co);
 
                         return res.view('vistas/habitaciones/habitacionesDisponibles', {
                             habitaciones: habitaciones
@@ -228,32 +233,33 @@ module.exports = {
 
     informacionReserva: function (req, res) {
 
+
         var parametros = req.allParams();
         var misCookies;
-        sails.log.info("Parametros: " + parametros);
-        sails.log.info("Mis cookies: " + parametros.cookiess);
-        sails.log.info("Mis cookies: " + req.cookies.busqueda());
-        sails.log.info("Mis cookies: " + req.cookies.busqueda());
+        var fechInicial = req.cookies.busqueda[0].fechaInicio;
+        var fechFinal = req.cookies.busqueda[0].fechaSalida;
+        sails.log.info("Mis cookiessssssssssaaa: " + fechInicial);
+        sails.log.info("Mis cookiessssssssssss: " + fechFinal);
 
-        //        var fechas = {
-        //            fechaInicial: parametros.fechaInicial,
         //            fechaFinal: parametros.fechaFinal
         //        }
         var indices = parametros.ides;
 
         sails.log.info(parametros);
 
-        var numHues = 0;
+        var numerosHues = 0;
 
         for (var i = 0; i < parametros.numHuespedes.length; i++) {
-            numHues += (parametros.numHuespedes[i] * 1);
+            numerosHues += (parametros.numHuespedes[i] * 1);
         }
 
-        sails.log.info("Numero de huespedes: " + numHues);
+        sails.log.info("Numero de huespedes: " + numerosHues);
 
         Usuario.findOne({
                 correo: parametros.correo
+
             })
+            .populate("Reservas")
             .exec(function (errorIndefinido, usuarioEncontrado) {
 
                 if (errorIndefinido) {
@@ -265,8 +271,8 @@ module.exports = {
                         }
                     });
                 }
-            
-                if(!usuarioEncontrado){
+
+                if (!usuarioEncontrado) {
                     res.view('vistas/Error', {
                         error: {
                             desripcion: "Usuario no encontrado",
@@ -275,44 +281,41 @@ module.exports = {
                         }
                     });
                 }
-            
-                sails.log.info("Usuario "+usuarioEncontrado);
+
+                sails.log.info("Usuario " + usuarioEncontrado);
+
                 for (var i = 0; i < indices.length; i++) {
 
 
                     var reservaCrear = {
-                        numeroHuespedes: numHues,
-                        fechaInicialReserva: parametros.fechaInicial,
-                        fechaFinReserva: parametros.fechaFinal,
+                        numeroHuespedes: numerosHues,
+                        fechaInicialReserva: fechInicial,
+                        fechaFinReserva: fechFinal,
                         idUsuario: usuarioEncontrado.id,
                         idHabitacion: indices[i]
 
                     }
+                    sails.log.info("Reserva  " + reservaCrear.numeroHuespedes);
+                    sails.log.info("Reserva  " + reservaCrear.fechaInicialReserva);
+                    sails.log.info("Reserva  " + reservaCrear.fechaFinReserva);
+                    sails.log.info("Reserva  " + reservaCrear.idUsuario);
+                    sails.log.info("Reserva  " + reservaCrear.idHabitacion);
 
-                    Habitacion.create(reservaCrear).exec(function (err, habitacionCreada) {
-//                        if (err) {
-//                            return res.view('vistas/Error', {
-//                                error: {
-//                                    desripcion: "Fallo al crear la Reserva",
-//                                    rawError: err,
-//                                    url: "/CrearUsuario"
-//                                }
-//
-//                            });
-//                        }
-                        
-                        
-                        
-                        sails.log.info("Reserva  "+reservaCrear);
+                    Reserva.create(reservaCrear).exec(function (err, habitacionCreada) {
 
+                        sails.log.info("Reserva 1 " + habitacionCreada);
 
                     })
                 }
-//                return res.view('vistas/habitaciones/informacionHuespedes', {
-//                    numHues, indices
-//                });
+
+            
+            sails.log.info("Ya termino" + numerosHues);
+                return res.view('vistas/habitaciones/informacionHuespedes', {
+                    numerosHues:numerosHues, indices:indices
+                });
 
             })
+
 
 
 
@@ -373,8 +376,8 @@ module.exports = {
 
     getCookieHabitacion: function (req, res) {
         //res.ok(req.cookies.busqueda);
-        
-        var co=req.cookies.busqueda;
+
+        var co = req.cookies.busqueda;
         sails.log.info(co);
         return res.ok(co);
 
